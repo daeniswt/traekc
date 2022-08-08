@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/menu_tracking_title" />
+
+    <item
+        android:id="@+id/menu_tipps"
+        android:title="@string/menu_tipps_title" />
+
+
+
+</menu>
