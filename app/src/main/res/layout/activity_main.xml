@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity_Tracking">
+
+    <LinearLayout
+        android:id="@+id/fortschritt_balken"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/wertbewegug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Minuten an Bewegung:" />
+
+        <TextView
+            android:id="@+id/wertanzeigeBewegung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <ProgressBar
+            android:id="@+id/progressbewegung"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="128dp" />
+
+        <TextView
+            android:id="@+id/werttrinken"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flüssigkeit getrunken:" />
+
+        <TextView
+            android:id="@+id/wertanzeigeWasser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <ProgressBar
+            android:id="@+id/progresstrinken"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="128dp" />
+
+        <TextView
+            android:id="@+id/wertmahlzeiten"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Mahlzeiten:" />
+
+        <TextView
+            android:id="@+id/wertanzeigeMahlzeiten"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:text="TextView" />
+
+        <ProgressBar
+            android:id="@+id/progressmahlzeit"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="112dp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addAktivitaet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/aktivitaet_hinzufuegen"
+        android:src="@drawable/aktivitaet_hinzu"
+        app:fabCustomSize="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/removeAktivitaet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/aktivitaet_entfernen"
+        android:src="@drawable/aktivitaet_entfern"
+        app:fabCustomSize="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addAktivitaet"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="566dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
