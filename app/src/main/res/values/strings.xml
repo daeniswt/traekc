@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Fitness Track</string>
+    <string name="menu_tracking_title">Zu dem Tracking</string>
+    <string name="menu_tipps_title">Zeige Tipps!</string>
+    <string name="aktivitaet_hinzufuegen">aktivitaet_add</string>
+    <string name="aktivitaet_entfernen">aktivitaet_remove</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="moderate_aktivitaet">Moderate Aktivität</string>
+    <string name="intensive_aktivitaet">Intensive Aktivität</string>
+    <string name="mahlzeit_hinzufuegen">Mahlzeit hinzufügen</string>
+    <string name="wasser_getrunken">Wasser getrunken</string>
+    <string name="wasserpref">einskommmafünf /  </string>
+</resources>
