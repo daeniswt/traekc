@@ -50,6 +50,8 @@ public class MainActivity_Tracking extends AppCompatActivity {
     //Texte über den Fortschrittsbalken
     private TextView TextViewMahlzeiten;
     private TextView TextViewTrinken;
+
+
     private static TextView TextViewWasser;
     private TextView TextViewBewegung;
 
@@ -79,12 +81,8 @@ public class MainActivity_Tracking extends AppCompatActivity {
         TextViewBewegung = findViewById(R.id.wertanzeigeBewegung);
 
 
-
-
-
         FloatingActionButton addA = findViewById(R.id.addAktivitaet);
         FloatingActionButton removeA = findViewById(R.id.removeAktivitaet);
-
 
 
         //ON-CLICK für die Floating Buttons
@@ -100,7 +98,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
         removeA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //Methode, um den letzten eintrag rückgängig zu machen
+                //Methode, um den letzten eintrag rückgängig zu machen
             }
         });
 
@@ -119,11 +117,6 @@ public class MainActivity_Tracking extends AppCompatActivity {
         intensiv = AuswahlDialog.findViewById(R.id.intensiv);
         trinken = AuswahlDialog.findViewById(R.id.trinken);
         mahlzeit = AuswahlDialog.findViewById(R.id.nahrung);
-
-
-
-
-
 
 
         mahlzeit.setOnClickListener(new View.OnClickListener() {
@@ -159,9 +152,6 @@ public class MainActivity_Tracking extends AppCompatActivity {
                 newWasser.show(getSupportFragmentManager(), "wasserdia");
 
 
-
-
-
             }
         });
 
@@ -172,12 +162,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
     //--Dialoge für die einzelnen Buttons + Funktion + Wertzuweisung -----------------------------
 
 
-
-
-
-
     //-------------------------------------------------------------------------
-
 
 
     public void ZeigIntensivDialog() {
@@ -189,7 +174,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
     }
 
     public void ZeigMahlzeitDialog() {
-        this.mahlzeiterg=mahlzeiterg;
+        this.mahlzeiterg = mahlzeiterg;
         Dialog MahlzeitDialog = new Dialog(this);
         MahlzeitDialog.setContentView(R.layout.popup_mahlzeit);
 
@@ -200,7 +185,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                mahlzeiterg=+ 1;
+                mahlzeiterg = +1;
 
                 //Dialog nachdem inkrementirt wurde als bestätigung
 
@@ -212,7 +197,6 @@ public class MainActivity_Tracking extends AppCompatActivity {
                 });
 
             }
-
 
 
         });
@@ -229,7 +213,6 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
 
     //--Toolbar Menü -----------------------------------------------------------------
-
 
 
     @Override
@@ -264,37 +247,21 @@ public class MainActivity_Tracking extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //GETTER UND SETTER (WOHIN PACKEN?)
+
+    public static TextView getTextViewWasser() {
+        return TextViewWasser;
+    }
+
+    public static void setTextViewWasser(TextView textViewWasser) {
+        TextViewWasser = textViewWasser;
+    }
+
+
+
+}
+
+
 
     //----------------------------------------------
 
-    public static class StarteWasserDialog extends DialogFragment {
-        EditText wassereing;
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = this.getLayoutInflater();
-            View wasserview = inflater.inflate(R.layout.poput_eingabewasser, null);
-            builder.setView(wasserview);
-
-            builder.setTitle("Gib an wieviel Wasser du getrunken hast")
-                    .setPositiveButton(R.string.wasserbest, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            wassereing = wasserview.findViewById(R.id.eingabeWasser);
-
-                            int valueeing = Integer.parseInt(wassereing.getText().toString());
-                            TextViewWasser.setText(Integer.toString(valueeing));
-                        }
-                    })
-                    .setNegativeButton(R.string.wassercancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // canceln des dialogs und keine änderung!
-                        }
-                    });
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
-    }
-}
