@@ -1,6 +1,6 @@
 package com.example.fitnesstrack;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -156,7 +156,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
                 AuswahlDialog.dismiss();
 
                 DialogFragment newWasser = new StarteWasserDialog();
-                newWasser.show(getSupportFragmentManager(), "wasserd");
+                newWasser.show(getSupportFragmentManager(), "wasserdia");
 
 
 
@@ -276,20 +276,21 @@ public class MainActivity_Tracking extends AppCompatActivity {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = this.getLayoutInflater();
-
-            builder.setView(inflater.inflate(R.layout.poput_eingabewasser, null));
+            View wasserview = inflater.inflate(R.layout.poput_eingabewasser, null);
+            builder.setView(wasserview);
 
             builder.setTitle("Gib an wieviel Wasser du getrunken hast")
                     .setPositiveButton(R.string.wasserbest, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            wassereing = wasserview.findViewById(R.id.eingabeWasser);
 
-                            int value = Integer.parseInt(wassereing.getText().toString());
-                            TextViewWasser.setText(value);
+                            int valueeing = Integer.parseInt(wassereing.getText().toString());
+                            TextViewWasser.setText(Integer.toString(valueeing));
                         }
                     })
                     .setNegativeButton(R.string.wassercancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
+                            // canceln des dialogs und keine änderung!
                         }
                     });
             // Create the AlertDialog object and return it
