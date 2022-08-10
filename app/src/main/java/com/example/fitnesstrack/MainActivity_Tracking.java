@@ -154,10 +154,9 @@ public class MainActivity_Tracking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AuswahlDialog.dismiss();
-                DialogFragment newWasser = new StarteWasserDialog();
-                StarteWasserDialog.show(getSupportFragmentManager(), "wasser");
 
-                //warten auf Usereingabe hier?
+                DialogFragment newWasser = new StarteWasserDialog();
+                newWasser.show(getSupportFragmentManager(), "wasserd");
 
 
 
@@ -178,6 +177,8 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
 
     //-------------------------------------------------------------------------
+
+
 
     public void ZeigIntensivDialog() {
         //platz für bewegendialog
@@ -269,15 +270,12 @@ public class MainActivity_Tracking extends AppCompatActivity {
     public static class StarteWasserDialog extends DialogFragment {
         EditText wassereing;
 
-        @NonNull
+        @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-
 
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-            LayoutInflater inflater = requireActivity().getLayoutInflater();
+            LayoutInflater inflater = this.getLayoutInflater();
 
             builder.setView(inflater.inflate(R.layout.poput_eingabewasser, null));
 
