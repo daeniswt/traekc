@@ -229,6 +229,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
         if (id == R.id.menu_home) {
 
             //zurückwechseln zum tracker wenn in anderem menüpunkt
+            //TODO
 
         }
 
@@ -247,7 +248,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //GETTER UND SETTER (WOHIN PACKEN?)
+    //GETTER UND SETTER (WOHIN PACKEN?) TODO
 
     public static TextView getTextViewWasser() {
         return TextViewWasser;
