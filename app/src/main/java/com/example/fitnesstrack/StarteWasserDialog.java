@@ -30,6 +30,7 @@ public class StarteWasserDialog extends DialogFragment {
 
                         int valueeing = Integer.parseInt(wassereing.getText().toString());
                         MainActivity_Tracking.getTextViewWasser().setText(Integer.toString(valueeing));
+                        //TODO: addieren auf den init
                     }
                 })
                 .setNegativeButton(R.string.wassercancel, new DialogInterface.OnClickListener() {

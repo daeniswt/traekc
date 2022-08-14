@@ -25,7 +25,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
     //variablen der Textanzeige
     private int bewegerg;
-    public int mahlzeiterg;
+    private int mahlzeiterg = 0;
     private int finaleswassererg;
     private int wassererg;
     private int eingtrinken;
@@ -73,8 +73,12 @@ public class MainActivity_Tracking extends AppCompatActivity {
         int wassererg = 0;
         int mahlzeiterg = 0;
 
+        //STRINGS FÜR TEXTVIEWS
+        String mahlzeittext = "3 / " + String.valueOf(mahlzeiterg);
+
+
         TextViewMahlzeiten = findViewById(R.id.wertanzeigeMahlzeiten);
-        TextViewMahlzeiten.setText("3 / " + String.valueOf(mahlzeiterg));
+        TextViewMahlzeiten.setText(mahlzeittext);
         TextViewWasser = findViewById(R.id.wertanzeigeWasser);
         TextViewWasser.setText(R.string.wasserpref + " / " + wassererg);
 
@@ -123,7 +127,24 @@ public class MainActivity_Tracking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AuswahlDialog.dismiss();
-                ZeigMahlzeitDialog();
+
+                mahlzeiterg++;
+
+                Dialog MahlzeitDialog = new Dialog(MainActivity_Tracking.this);
+                MahlzeitDialog.setContentView(R.layout.popup_mahlzeit);
+
+                Button schliessen = MahlzeitDialog.findViewById(R.id.bestätigemahlzeit);
+
+
+                schliessen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MahlzeitDialog.dismiss();
+                    }
+
+                });
+                MahlzeitDialog.show();
+
             }
         });
 
@@ -167,44 +188,22 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
     public void ZeigIntensivDialog() {
         //platz für bewegendialog
+        //TODO
     }
 
     public void ZeigModeratDialog() {
         //platz für bewegendialog
+        //TODO
     }
 
+
     public void ZeigMahlzeitDialog() {
-        this.mahlzeiterg = mahlzeiterg;
-        Dialog MahlzeitDialog = new Dialog(this);
-        MahlzeitDialog.setContentView(R.layout.popup_mahlzeit);
 
-        Button schliessen = MahlzeitDialog.findViewById(R.id.bestätigemahlzeit);
-
-
-        mahlzeit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                mahlzeiterg = +1;
-
-                //Dialog nachdem inkrementirt wurde als bestätigung
-
-                schliessen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MahlzeitDialog.dismiss();
-                    }
-                });
-
-            }
-
-
-        });
 
         //mahlzeiterg mit klick auf button um 1 inkrementieren
 
 
-        MahlzeitDialog.show();
+
 
 
     }
