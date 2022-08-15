@@ -12,4 +12,5 @@
     <string name="wasserpref">einskommmafünf /  </string>
     <string name="wasserbest">Bestätigen</string>
     <string name="wassercancel">Abbruch</string>
+    <string name="mahlzeitpräfix">3 / </string>
 </resources>

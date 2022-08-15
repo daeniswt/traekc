@@ -12,6 +12,9 @@ import androidx.fragment.app.DialogFragment;
 
 public class StarteWasserDialog extends DialogFragment {
 
+    private int valueeing;
+
+
     EditText wassereing;
 
     @Override
@@ -28,8 +31,8 @@ public class StarteWasserDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         wassereing = wasserview.findViewById(R.id.eingabeWasser);
 
-                        int valueeing = Integer.parseInt(wassereing.getText().toString());
-                        MainActivity_Tracking.getTextViewWasser().setText(Integer.toString(valueeing));
+                        valueeing = Integer.parseInt(wassereing.getText().toString());
+                        //MainActivity_Tracking.getTextViewWasser().setText(Integer.toString(valueeing));
                         //TODO: addieren auf den init
                     }
                 })
@@ -41,6 +44,18 @@ public class StarteWasserDialog extends DialogFragment {
         // Create the AlertDialog object and return it
         return builder.create();
     }
+
+
+    public int getValueeing() {
+
+        return valueeing;
+    }
+
+    public void setValueeing(int valueeing) {
+
+        this.valueeing = valueeing;
+    }
+
 }
 
 

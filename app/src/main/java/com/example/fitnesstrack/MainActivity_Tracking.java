@@ -25,9 +25,11 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
     //variablen der Textanzeige
     private int bewegerg;
-    private int mahlzeiterg = 0;
-    private int finaleswassererg;
-    private int wassererg;
+    private int mahlzeiterg;
+    public int wasserfinal;
+    public int wassererg;
+    public int wasserzwischen;
+    public int mahlzeitcount = 0;
     private int eingtrinken;
 
 
@@ -48,12 +50,27 @@ public class MainActivity_Tracking extends AppCompatActivity {
     private ProgressBar fortBewegung;
 
     //Texte über den Fortschrittsbalken
-    private TextView TextViewMahlzeiten;
+    public TextView TextViewMahlzeiten;
     private TextView TextViewTrinken;
-
-
     private static TextView TextViewWasser;
     private TextView TextViewBewegung;
+
+
+    //GETTER UND SETTER (WOHIN PACKEN?) TODO
+
+    public static TextView getTextViewWasser() {
+        return TextViewWasser;
+    }
+
+    public static void setTextViewWasser(TextView textViewWasser) {
+        TextViewWasser = textViewWasser;
+    }
+
+
+    public void setWassererg(int wassererg) {
+        this.wassererg = wassererg;
+    }
+
 
 
     @Override
@@ -71,18 +88,11 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
         //INIT
         int wassererg = 0;
-        int mahlzeiterg = 0;
 
-        //STRINGS FÜR TEXTVIEWS
-        String mahlzeittext = "3 / " + String.valueOf(mahlzeiterg);
-
-
-        TextViewMahlzeiten = findViewById(R.id.wertanzeigeMahlzeiten);
-        TextViewMahlzeiten.setText(mahlzeittext);
-        TextViewWasser = findViewById(R.id.wertanzeigeWasser);
-        TextViewWasser.setText(R.string.wasserpref + " / " + wassererg);
-
-        TextViewBewegung = findViewById(R.id.wertanzeigeBewegung);
+        //Textviews id's zuordnen
+        TextViewMahlzeiten = (TextView) findViewById(R.id.wertanzeigeMahlzeiten);
+        TextViewWasser = (TextView) findViewById(R.id.wertanzeigeWasser);
+        TextViewBewegung = (TextView) findViewById(R.id.wertanzeigeBewegung);
 
 
         FloatingActionButton addA = findViewById(R.id.addAktivitaet);
@@ -96,6 +106,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
             public void onClick(View v) {
                 //Starten der Methode, die das Auswahlfeld für einen Eintrag öffnet
                 aktivitaetauswahl();
+
             }
         });
 
@@ -106,6 +117,12 @@ public class MainActivity_Tracking extends AppCompatActivity {
             }
         });
 
+        wasserfinal = wassererg + wasserzwischen;
+        TextViewWasser.setText(R.string.wasserpref + " / " + wasserfinal);
+        
+        TextViewMahlzeiten.setText(getString(R.string.mahlzeitpräfix) + mahlzeitcount);
+
+
     }
 
     //Methoden für die Dialoge:
@@ -115,7 +132,9 @@ public class MainActivity_Tracking extends AppCompatActivity {
         //um die Funktionen zuzuweisen
 
         //Dialog eine COntentView zuweisen, hier das layout für das erste Pop-Up Fenster
+        Dialog AuswahlDialog = new Dialog(this);
         AuswahlDialog.setContentView(R.layout.popup_aktivitaetswahl);
+
 
         moderat = AuswahlDialog.findViewById(R.id.moderat);
         intensiv = AuswahlDialog.findViewById(R.id.intensiv);
@@ -128,10 +147,12 @@ public class MainActivity_Tracking extends AppCompatActivity {
             public void onClick(View view) {
                 AuswahlDialog.dismiss();
 
-                mahlzeiterg++;
-
                 Dialog MahlzeitDialog = new Dialog(MainActivity_Tracking.this);
                 MahlzeitDialog.setContentView(R.layout.popup_mahlzeit);
+
+                    mahlzeitcount++;
+                    TextViewMahlzeiten.setText(getString(R.string.mahlzeitpräfix) + mahlzeitcount);
+
 
                 Button schliessen = MahlzeitDialog.findViewById(R.id.bestätigemahlzeit);
 
@@ -172,12 +193,19 @@ public class MainActivity_Tracking extends AppCompatActivity {
                 DialogFragment newWasser = new StarteWasserDialog();
                 newWasser.show(getSupportFragmentManager(), "wasserdia");
 
+                StarteWasserDialog instance = new StarteWasserDialog();
+                wasserzwischen = Integer.parseInt(String.valueOf(instance.getValueeing()));
+
+
 
             }
         });
 
         AuswahlDialog.show();
     }
+
+
+
 
 
     //--Dialoge für die einzelnen Buttons + Funktion + Wertzuweisung -----------------------------
@@ -247,15 +275,6 @@ public class MainActivity_Tracking extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //GETTER UND SETTER (WOHIN PACKEN?) TODO
-
-    public static TextView getTextViewWasser() {
-        return TextViewWasser;
-    }
-
-    public static void setTextViewWasser(TextView textViewWasser) {
-        TextViewWasser = textViewWasser;
-    }
 
 
 
