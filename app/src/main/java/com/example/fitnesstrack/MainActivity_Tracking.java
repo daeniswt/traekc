@@ -25,12 +25,18 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
     //variablen der Textanzeige
     private int bewegerg;
-    private int mahlzeiterg;
+
     public int wasserfinal;
-    public int wassererg;
     public int wasserzwischen;
+
+    private int wasserini = 0;
+
+
+
+
+
+    //Initialisierungswert des Counters der Mahlzeiten:
     public int mahlzeitcount = 0;
-    private int eingtrinken;
 
 
     //Dialoge
@@ -67,9 +73,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
     }
 
 
-    public void setWassererg(int wassererg) {
-        this.wassererg = wassererg;
-    }
+
 
 
 
@@ -117,9 +121,9 @@ public class MainActivity_Tracking extends AppCompatActivity {
             }
         });
 
-        wasserfinal = wassererg + wasserzwischen;
+
         TextViewWasser.setText(R.string.wasserpref + " / " + wasserfinal);
-        
+
         TextViewMahlzeiten.setText(getString(R.string.mahlzeitpräfix) + mahlzeitcount);
 
 
@@ -193,8 +197,8 @@ public class MainActivity_Tracking extends AppCompatActivity {
                 DialogFragment newWasser = new StarteWasserDialog();
                 newWasser.show(getSupportFragmentManager(), "wasserdia");
 
-                StarteWasserDialog instance = new StarteWasserDialog();
-                wasserzwischen = Integer.parseInt(String.valueOf(instance.getValueeing()));
+
+
 
 
 
@@ -225,18 +229,14 @@ public class MainActivity_Tracking extends AppCompatActivity {
     }
 
 
-    public void ZeigMahlzeitDialog() {
-
-
-        //mahlzeiterg mit klick auf button um 1 inkrementieren
 
 
 
-
+    public void updateBewegung() {
 
     }
 
-    //keinen Dialog für mahlzeiten weil diese immer nur um 1 erhöht wird - Umsetzung?
+
 
 
     //--Toolbar Menü -----------------------------------------------------------------
@@ -276,6 +276,14 @@ public class MainActivity_Tracking extends AppCompatActivity {
     }
 
 
+
+    public int getWasserini() {
+        return wasserini;
+    }
+
+    public void setWasserini(int wasserini) {
+        this.wasserini = wasserini;
+    }
 
 
 }
