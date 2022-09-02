@@ -1,27 +1,23 @@
 package com.example.fitnesstrack;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity_Tracking extends AppCompatActivity {
+public class MainActivity_Tracking extends AppCompatActivity{
 
     //variablen der Textanzeige
     private int bewegerg;
@@ -58,18 +54,17 @@ public class MainActivity_Tracking extends AppCompatActivity {
     //Texte über den Fortschrittsbalken
     public TextView TextViewMahlzeiten;
     private TextView TextViewTrinken;
-    private static TextView TextViewWasser;
-    private TextView TextViewBewegung;
+    private TextView TextViewWasser;
 
 
     //GETTER UND SETTER (WOHIN PACKEN?) TODO
 
-    public static TextView getTextViewWasser() {
+    public TextView getTextViewWasser() {
         return TextViewWasser;
     }
 
-    public static void setTextViewWasser(TextView textViewWasser) {
-        TextViewWasser = textViewWasser;
+    public void setTextViewWasser(TextView textViewWasser) {
+        this.TextViewWasser = textViewWasser;
     }
 
 
@@ -96,7 +91,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
         //Textviews id's zuordnen
         TextViewMahlzeiten = (TextView) findViewById(R.id.wertanzeigeMahlzeiten);
         TextViewWasser = (TextView) findViewById(R.id.wertanzeigeWasser);
-        TextViewBewegung = (TextView) findViewById(R.id.wertanzeigeBewegung);
+        TextView textViewBewegung = (TextView) findViewById(R.id.wertanzeigeBewegung);
 
 
         FloatingActionButton addA = findViewById(R.id.addAktivitaet);
@@ -121,10 +116,16 @@ public class MainActivity_Tracking extends AppCompatActivity {
             }
         });
 
+        DialogFragment newWasser2 = new StarteWasserDialog();
+        int newwasser = 0;
 
-        TextViewWasser.setText(R.string.wasserpref + " / " + wasserfinal);
+        int oldwasser = Integer.parseInt(TextViewWasser.getText().toString());
 
-        TextViewMahlzeiten.setText(getString(R.string.mahlzeitpräfix) + mahlzeitcount);
+
+
+        TextViewWasser.setText(R.string.wasserpref + R.string.Trenner + (oldwasser + newwasser));
+
+        TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + mahlzeitcount);
 
 
     }
@@ -155,7 +156,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
                 MahlzeitDialog.setContentView(R.layout.popup_mahlzeit);
 
                     mahlzeitcount++;
-                    TextViewMahlzeiten.setText(getString(R.string.mahlzeitpräfix) + mahlzeitcount);
+                    TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + mahlzeitcount);
 
 
                 Button schliessen = MahlzeitDialog.findViewById(R.id.bestätigemahlzeit);
@@ -196,6 +197,7 @@ public class MainActivity_Tracking extends AppCompatActivity {
 
                 DialogFragment newWasser = new StarteWasserDialog();
                 newWasser.show(getSupportFragmentManager(), "wasserdia");
+
 
 
 

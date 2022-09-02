@@ -13,4 +13,5 @@
     <string name="wasserbest">Bestätigen</string>
     <string name="wassercancel">Abbruch</string>
     <string name="mahlzeitpräfix">3 / </string>
+    <string name="Trenner"> / </string>
 </resources>

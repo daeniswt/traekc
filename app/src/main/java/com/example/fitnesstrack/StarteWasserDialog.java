@@ -8,22 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class StarteWasserDialog extends DialogFragment {
 
-    private int valueeing;
     private int prevwasser = 0;
     EditText wassereing;
 
-    @NonNull
-    //Ovverride?
+
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         // Use the Builder class for convenient dialog construction
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
         View wasserview = inflater.inflate(R.layout.poput_eingabewasser, null);
         builder.setView(wasserview);
 
@@ -34,18 +33,15 @@ public class StarteWasserDialog extends DialogFragment {
                 .setPositiveButton(R.string.wasserbest, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
+                        Wasser wasser;
                         try {
 
-                            valueeing = Integer.parseInt(wassereing.getText().toString());
-                            updateWasser();
+                            wasser = new Wasser(-1, Integer.parseInt(wassereing.getText().toString()));
+                            //valueeing = Integer.parseInt(wassereing.getText().toString());
 
-                            prevwasser = prevwasser + valueeing;
+
                             //TODO
 
-
-                        }catch (NumberFormatException nfe) {
-
-                            //Toast der den User benachrichtigt, nur ganzzahken einzugeben
 
                         }catch (Exception e){
                             if(wassereing.length() == 0) {
@@ -53,7 +49,9 @@ public class StarteWasserDialog extends DialogFragment {
                             }
                         }
 
-                        //TODO: addieren auf den init
+
+                        DatabaseHelper databaseHelper = new DatabaseHelper( );
+                        databaseHelper.addOne(wasser); //TODO
 
 
                     }
@@ -68,24 +66,12 @@ public class StarteWasserDialog extends DialogFragment {
     }
 
 
-    public void updateWasser() {
-
-        int wasserfinal = prevwasser + valueeing;
-
-        MainActivity_Tracking.getTextViewWasser().setText(R.string.wasserpref + " / " + wasserfinal);
-
-    }
 
 
-    public int getValueeing() {
 
-        return valueeing;
-    }
 
-    public void setValueeing(int valueeing) {
 
-        this.valueeing = valueeing;
-    }
+
 
     public int getPrevwasser() {
         return prevwasser;
