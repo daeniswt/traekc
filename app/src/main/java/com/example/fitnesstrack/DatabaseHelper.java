@@ -17,8 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_WASSER_VALUE = "WASSER_VALUE";
     public static final String COLUMN_ID = "ID";
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, StarteWasserDialog starteWasserDialog) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
 
@@ -61,10 +61,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_WASSER_VALUE, wasser.getValueeing());
+
         long insert = db.insert(WASSER_TABLE, null, cv);
+
         if (insert == -1) {
             return false;
+
         }else {
+
             return true;
         }
 

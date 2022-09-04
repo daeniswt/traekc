@@ -1,16 +1,21 @@
 package com.example.fitnesstrack;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -68,6 +73,10 @@ public class MainActivity_Tracking extends AppCompatActivity{
     }
 
 
+    //Edittext
+    EditText wassereing;
+
+
 
 
 
@@ -98,6 +107,7 @@ public class MainActivity_Tracking extends AppCompatActivity{
         FloatingActionButton removeA = findViewById(R.id.removeAktivitaet);
 
 
+
         //ON-CLICK für die Floating Buttons
 
         addA.setOnClickListener(new View.OnClickListener() {
@@ -116,14 +126,8 @@ public class MainActivity_Tracking extends AppCompatActivity{
             }
         });
 
-        DialogFragment newWasser2 = new StarteWasserDialog();
-        int newwasser = 0;
-
-        int oldwasser = Integer.parseInt(TextViewWasser.getText().toString());
 
 
-
-        TextViewWasser.setText(R.string.wasserpref + R.string.Trenner + (oldwasser + newwasser));
 
         TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + mahlzeitcount);
 
@@ -195,9 +199,48 @@ public class MainActivity_Tracking extends AppCompatActivity{
             public void onClick(View view) {
                 AuswahlDialog.dismiss();
 
-                DialogFragment newWasser = new StarteWasserDialog();
-                newWasser.show(getSupportFragmentManager(), "wasserdia");
+                AlertDialog.Builder wasserdialog = new AlertDialog.Builder(MainActivity_Tracking.this);
+                LayoutInflater inflater = MainActivity_Tracking.this.getLayoutInflater();
+                View wasserview = inflater.inflate(R.layout.poput_eingabewasser, null);
+                wasserdialog.setView(wasserview);
 
+
+                EditText wassereing = findViewById(R.id.eingabeWasser);
+
+
+
+                wasserdialog.setTitle("Gib an wieviel Wasser du getrunken hast")
+                        .setPositiveButton(R.string.wasserbest, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Wasser wasser = null;
+
+                                try {
+
+
+                                    wasser = new Wasser(-1, Integer.parseInt(wassereing.getText().toString()));
+                                    //TODO
+
+
+                                }catch (Exception e){
+                                    if(wassereing.length() == 0) {
+                                        Toast.makeText(MainActivity_Tracking.this, "Feld nicht leer lassen oder auf 'Abbrechen' tippen. " , Toast.LENGTH_LONG);
+                                    }
+                                }
+
+
+                                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity_Tracking.this);
+                                databaseHelper.addOne(wasser);
+                            }
+                        })
+                        .setNegativeButton(R.string.wassercancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // canceln des dialogs und keine änderung!
+                            }
+                        });
+
+                // mittels der Funktion show() den Dialog aufrufen nachdem er erstellt wurde.
+                wasserdialog.show();
 
 
 
