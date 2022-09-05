@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -126,10 +125,10 @@ public class MainActivity_Tracking extends AppCompatActivity{
             }
         });
 
+        int wasserinit = 0;
 
-
-
-        TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + mahlzeitcount);
+        TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + Integer.toString(mahlzeitcount));
+        TextViewWasser.setText(R.string.wasserpref + Integer.toString(wasserinit));
 
 
     }
@@ -137,14 +136,15 @@ public class MainActivity_Tracking extends AppCompatActivity{
     //Methoden für die Dialoge:
 
     public void aktivitaetauswahl() {
-        //methode, um den Hauptdialog zu starten &
+        //Methode, um den Hauptdialog zu starten &
         //um die Funktionen zuzuweisen
 
-        //Dialog eine COntentView zuweisen, hier das layout für das erste Pop-Up Fenster
+        //Dialog eine ContentView zuweisen, hier das Layout für den ersten Dialog festzulegen
         Dialog AuswahlDialog = new Dialog(this);
         AuswahlDialog.setContentView(R.layout.popup_aktivitaetswahl);
 
 
+        // Buttons im ersten Dialog ("AuswahlDialog"); zuweisung der Buttonelemente vom Layout
         moderat = AuswahlDialog.findViewById(R.id.moderat);
         intensiv = AuswahlDialog.findViewById(R.id.intensiv);
         trinken = AuswahlDialog.findViewById(R.id.trinken);
@@ -160,7 +160,8 @@ public class MainActivity_Tracking extends AppCompatActivity{
                 MahlzeitDialog.setContentView(R.layout.popup_mahlzeit);
 
                     mahlzeitcount++;
-                    TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + mahlzeitcount);
+                    TextViewMahlzeiten.setText("3: " + Integer.toString(mahlzeitcount));
+
 
 
                 Button schliessen = MahlzeitDialog.findViewById(R.id.bestätigemahlzeit);
@@ -204,10 +205,7 @@ public class MainActivity_Tracking extends AppCompatActivity{
                 View wasserview = inflater.inflate(R.layout.poput_eingabewasser, null);
                 wasserdialog.setView(wasserview);
 
-
                 EditText wassereing = findViewById(R.id.eingabeWasser);
-
-
 
                 wasserdialog.setTitle("Gib an wieviel Wasser du getrunken hast")
                         .setPositiveButton(R.string.wasserbest, new DialogInterface.OnClickListener() {
@@ -216,21 +214,18 @@ public class MainActivity_Tracking extends AppCompatActivity{
                                 Wasser wasser = null;
 
                                 try {
-
-
                                     wasser = new Wasser(-1, Integer.parseInt(wassereing.getText().toString()));
-                                    //TODO
-
 
                                 }catch (Exception e){
-                                    if(wassereing.length() == 0) {
                                         Toast.makeText(MainActivity_Tracking.this, "Feld nicht leer lassen oder auf 'Abbrechen' tippen. " , Toast.LENGTH_LONG);
-                                    }
                                 }
 
-
                                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity_Tracking.this);
-                                databaseHelper.addOne(wasser);
+                                databaseHelper.addOneW(wasser);
+
+
+                                TextViewWasser.setText(R.string.wasserpref + R.string.Trenner + databaseHelper.getSumW());
+
                             }
                         })
                         .setNegativeButton(R.string.wassercancel, new DialogInterface.OnClickListener() {
@@ -274,12 +269,6 @@ public class MainActivity_Tracking extends AppCompatActivity{
     }
 
 
-
-
-
-    public void updateBewegung() {
-
-    }
 
 
 

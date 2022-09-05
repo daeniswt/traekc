@@ -9,9 +9,9 @@
     <string name="intensive_aktivitaet">Intensive Aktivität</string>
     <string name="mahlzeit_hinzufuegen">Mahlzeit hinzufügen</string>
     <string name="wasser_getrunken">Wasser getrunken</string>
-    <string name="wasserpref">einskommmafünf /  </string>
+    <string name="wasserpref">einskommmafünf :  </string>
     <string name="wasserbest">Bestätigen</string>
     <string name="wassercancel">Abbruch</string>
-    <string name="mahlzeitpräfix">3 / </string>
-    <string name="Trenner"> / </string>
+    <string name="mahlzeitpräfix">3 : </string>
+    <string name="Trenner"> : </string>
 </resources>
