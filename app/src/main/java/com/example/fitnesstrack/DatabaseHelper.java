@@ -10,6 +10,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Denise Weinert
+ * @version 1.0
+ *
+ * DatabaseHelper mit der abstrakten Klasse SQLiteOpenHelper zur erstellung der Datenbank für die
+ * Speicherung der Werte, die bei Wasseraufnahme eingegeben werden.
+ *
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "DatenbankWasser";
@@ -26,12 +35,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-
+    /**
+     * @param db ist die Datenbank, die beim erstellen generiert wird
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createTableStatement = "CREATE TABLE " + WASSER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_WASSER_VALUE + " INT)";
+        String createTableStatement = "CREATE TABLE " + WASSER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_WASSER_VALUE + " INTEGER)";
 
         try {
             db.execSQL(createTableStatement);
@@ -43,6 +53,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+    /**
+     * @param db
+     * @param i
+     * @param i1
+     */
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -62,12 +78,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Funktion, um einen Eintrag in die Datenbank Wasser zu machen.
 
+    /**
+     * Die Fuktion nimmt die Eingabe aus dem Dialog und fügt einen Eintrag in die Datenbank hinzu
+     * @param wasser der Objekt-Klasse Wasser speichert die Eingabe aus dem EditText wassereing
+     * @return gibt boolean zurück, also ob erfolg oder nicht bei insert des Content Values
+     */
     public boolean addOneW (Wasser wasser) {
-        wasser = new Wasser();
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_WASSER_VALUE, wasser.getValueeing());
+        cv.put(COLUMN_WASSER_VALUE, String.valueOf(wasser.getValueeing()));
 
         long insert = db.insert(WASSER_TABLE, null, cv);
 
@@ -81,28 +102,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //Funktion, um alle Einträge der Spalte mit den Milliliterwerten zu bekommen
-    public List<Wasser> WgetEverything() {
-
-        List<Wasser> returnList = new ArrayList<>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        return returnList;
-    }
 
     //Funktion getSum() nimmt alle Werte der Column Wasser Value und summiert sie auf.
 
-    public String getSumW() {
+    /**
+     * @return die Summe aller Einträge
+     */
+
+    public int getSumW() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String total_wasser = null;
+        int total_wasser = 0;
         Cursor c = db.rawQuery("SELECT SUM(" + COLUMN_WASSER_VALUE + ") FROM " + WASSER_TABLE, null);
         if (c.moveToFirst()) {
-            total_wasser = String.valueOf(c.getInt(0));
+            total_wasser= c.getInt(c.getColumnIndexOrThrow(COLUMN_WASSER_VALUE));;
         }
         c.close();
-        db.close();
+        //db.close();
 
         return total_wasser;
 
@@ -110,7 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public boolean deleteOneW (Wasser wasser) {
-
+        //TODO
        return true;
 
     }

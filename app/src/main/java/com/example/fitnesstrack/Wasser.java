@@ -18,11 +18,10 @@ public class Wasser {
         return valueeing;
     }
 
-    public void setValueeing(int valueeing) {
-        this.valueeing = valueeing;
+    @Override
+    public String toString() {
+        return "Wasser{" +
+                "valueeing=" + valueeing +
+                '}';
     }
-
-
-
-
 }
