@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fitness Track</string>
+    <string name="app_name">HealthHabitTracker</string>
     <string name="menu_tracking_title">Zu dem Tracking</string>
     <string name="menu_tipps_title">Zeige Tipps!</string>
     <string name="aktivitaet_hinzufuegen">aktivitaet_add</string>
@@ -12,6 +12,6 @@
     <string name="wasserpref">einskommmafünf :  </string>
     <string name="wasserbest">Bestätigen</string>
     <string name="wassercancel">Abbruch</string>
-    <string name="mahlzeitpräfix">3 : </string>
+    <string name="mahlzeitpref">3 : </string>
     <string name="Trenner"> : </string>
 </resources>

@@ -40,7 +40,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         String createTableStatement = "CREATE TABLE " + WASSER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_WASSER_VALUE + " INTEGER)";
 
         try {

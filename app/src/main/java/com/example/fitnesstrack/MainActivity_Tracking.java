@@ -108,7 +108,7 @@ public class MainActivity_Tracking extends AppCompatActivity{
 
 
         //Initialisierung der Texte über den Fortschritsbalken
-        TextViewMahlzeiten.setText(R.string.mahlzeitpräfix + Integer.toString(mahlzeitcount));
+        TextViewMahlzeiten.setText(R.string.mahlzeitpref + Integer.toString(mahlzeitcount));
         TextViewWasser.setText(R.string.wasserpref + Integer.toString(wasserinit));
 
 
@@ -205,7 +205,7 @@ public class MainActivity_Tracking extends AppCompatActivity{
                 AuswahlDialog.dismiss();
 
                 final AlertDialog.Builder wasserdialog = new AlertDialog.Builder(MainActivity_Tracking.this);
-                AlertDialog dialogInstance = wasserdialog.create();
+                AlertDialog dialogInstance = wasserdialog.create(); //Alternative zur Funktion wasserdialog.cancel(), um Dialog abzubrechen
                 LayoutInflater inflater = MainActivity_Tracking.this.getLayoutInflater();
                 View wasserview = inflater.inflate(R.layout.poput_eingabewasser, null);
                 wasserdialog.setView(wasserview);
@@ -216,13 +216,14 @@ public class MainActivity_Tracking extends AppCompatActivity{
                         .setPositiveButton(R.string.wasserbest, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
+                                Wasser wasserneu = new Wasser(-1, 0);
 
                                 try {
-                                    Wasser wasser = new Wasser(-1, Integer.parseInt(wassereing.getText().toString()));
-                                    Toast.makeText(MainActivity_Tracking.this, wasser.toString(), Toast.LENGTH_SHORT().show);
+                                    wasserneu = new Wasser(-1, Integer.parseInt(wassereing.getText().toString()));
 
                                 }catch (Exception e){
                                         Toast.makeText(MainActivity_Tracking.this, "Feld nicht leer lassen oder auf 'Abbrechen' tippen. " , Toast.LENGTH_LONG);
+                                        //Toast ist Element von Android, in dem eine kurzzeitige Benachrichtigung unten mittig eingeblendet wird.
                                 }
 
 
@@ -232,12 +233,13 @@ public class MainActivity_Tracking extends AppCompatActivity{
 
 
                                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity_Tracking.this);
-                                boolean erfolg = databaseHelper.addOneW(wasser);
+                                boolean success = databaseHelper.addOneW(wasserneu);
 
                                 /*Aktualisierung der TextView, nachdem mit der Funktion getSumW()
                                  die Spalte mit den Wasserwerten zusammengerechnet wird
                                  */
-                                TextViewWasser.setText("1500 : " + databaseHelper.getSumW());
+                                int wassertotal = databaseHelper.getSumW();
+                                TextViewWasser.setText("1500 : " + wassertotal);
 
                             }
                         })
@@ -271,6 +273,8 @@ public class MainActivity_Tracking extends AppCompatActivity{
      * @param menu Parameter übergeben zum zuweisen des Layouts der Toolbar
      * @return
      */
+
+    //Methode zur Erstellung der Optionen oben Rechts
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -291,7 +295,7 @@ public class MainActivity_Tracking extends AppCompatActivity{
 
 
         if (id == R.id.menu_home) {
-            //zurückwechseln zum tracker wenn in anderem menüpunkt
+            //zurückwechseln zum Tracker, wenn in anderem Menüpunkt
             //TODO
         }
 
